@@ -105,11 +105,13 @@ FROM film
 WHERE rating = 'R' AND length > 120;
 
 '''18. Muestra el nombre y apellido de los actores que aparecen en más de 10 películas.'''
-SELECT a.first_name, a.last_name
-FROM actor a
-JOIN film_actor fa ON a.actor_id = fa.actor_id
-GROUP BY a.actor_id, a.first_name, a.last_name
-HAVING COUNT(fa.film_id) > 10;
+SELECT t1.first_name, t1.last_name
+FROM sakila.actor t1
+JOIN sakila.film_actor t2 
+	ON t1.actor_id = t2.actor_id
+GROUP BY t1.actor_id
+HAVING COUNT(t2.film_id) > 10
+ORDER BY t1.first_name;
 
 '''19. Hay algún actor o actriz que no apareca en ninguna película en la tabla film_actor.'''
 
